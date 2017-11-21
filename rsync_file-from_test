@@ -1,3 +1,0 @@
-#!/bin/bash
-
-rsync -avzh --progress --dry-run --files-from=./rsync-files suv@tiffy:/ /home/jukas/Schreibtisch/test_rsync
