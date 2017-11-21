@@ -82,7 +82,7 @@ done
   read -r confirm
 
   case $confirm in
-    y*|Y*|j*|J* )
+    y*|Y*|j*|J*|"" )
       echo
       echo -e "GOGO GADGET"
       rsync -avzh --progress --dry-run --files-from=$source_files $cpuser@$cpserver:/ $destdir
