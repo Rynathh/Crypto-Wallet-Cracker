@@ -1,0 +1,99 @@
+#!/bin/bash
+
+#variables
+
+  maxcount=$maxcount
+  sourcedir=$sourcedir
+  destdir=$destdir
+  cpuser=$cpuser
+  confirm=$confirm
+  cpserver=$cpserver
+
+ echo -e "Wie viele Ordner sind zu Kopieren?"
+ read -r maxcount
+ while [[ "$maxcount" = "" ]]; do
+   echo -e "Die Anzahl der Ordner darf nicht Leer / 0 sein"
+   echo -e "Wie viele Ordner sind zu Kopieren?"
+   read -r maxcount
+ done #ende $maxcount check
+
+
+# for (( i = 0; i < $maxcount; i++ )); do
+for (( i = 0; i < $maxcount; i++)); do
+
+  # Welcher
+  echo -e "Welche Ordner soll kopiert werden?(vom qnap)"
+
+  read -r sourcedirNew
+  while [[ "$sourcedirNew" = "" ]]; do
+    echo -e "Quellordner darf nicht Leer sein"
+    echo -e "Welche Ordner soll kopiert werden?(vom qnap)"
+    echo -e ""
+    read -r sourcedirNew
+  done #ende $sourcedir check
+
+  # Wohin
+  echo -e "Wohin soll der Ordner kopiert werden?(local)"
+  read -r destdirNew
+  while [[ "$destdirNew" = "" ]]; do
+    echo -e "Zeilordner nach nicht leer sein"
+    echo -e "Wohin soll der Ordner kopiert werden?(local)"
+    echo -e ""
+    read -r destdirNew
+  done #ende $destdir check
+
+if [[ $maxcount == 1 || $i < 1 ]]; then
+ sourcedir="$sourcedirNew"
+ destdir="$destdirNew"
+#elif [[ $i == 1 ]]; then
+#  sourcedir="$sourcedirNew"
+#  destdir="$destdir"
+else
+  sourcedir="$sourcedir:$sourcedirNew"
+  destdir="$destdir:$destdirNew"
+fi
+
+done
+
+  echo -e "Mit welchem user soll Kopiert werden?[suv]"
+  read -r cpuser
+  while [[ "$cpuser" = "" ]]; do
+    cpuser=suv
+    # echo -e "User darf nicht leer sein"
+    # echo -e "Mit welchem user soll Kopiert werden?"
+    # read -r cpuser
+  done #cpuser check
+
+  echo -e "Von welchem Server soll kopiert werden?[tiffy]"
+  read -r cpserver
+  while [[ "$cpserver" = "" ]]; do
+    cpserver=tiffy
+    # echo -e "Server darf nicht leer sein"
+    # echo -e "Von welchem Server soll kopiert werden?"
+    # read -r cpserver
+  done #cpuser check
+
+
+
+  echo -e "Quellordner: $sourcedir"
+  echo -e "Zeilordner: $destdir"
+  echo -e "Copy User: $cpuser"
+  echo -e "Server: $cpserver"
+
+  echo -e "Sind diese Angaben richtig ? [Y]es / [N]o"
+  read -r confirm
+
+  case $confirm in
+    y*|Y*|j*|J* )
+      echo -e "GOGO GADGET"
+      rsync -avzh --progress --dry-run $cpuser@$cpserver:$sourcedir $destdir
+      ;;
+    n*|N*|j*|J* )
+      echo -e "Ordentlich Tippen! Script restart"
+      ./rsync_script
+  esac
+# done #ende for $maxcount
+
+
+# rsync -avzh --dry-run --files-from=testlist.txt /home/jukas rynathh@ultron:/home/rynathh
+# filelist plaintext, one line per file/folder

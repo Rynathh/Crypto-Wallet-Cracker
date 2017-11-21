@@ -1,0 +1,18 @@
+#! /bin/bash
+
+maxcount=$maxcount
+maxcount="10"
+#field=()
+#while read -r input ; do
+#    field+=("$input")
+#done
+#echo Num items: ${#field[@]}
+#echo Data: ${field[@]}
+#
+
+for (( i = 0; i < $maxcount; i++ )); do
+    field+=("$input")
+    echo field: ${#field[@]}
+    #echo Data: ${field[@]}
+done
+echo -e ${#field[@]}

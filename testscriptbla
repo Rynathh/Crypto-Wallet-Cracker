@@ -1,0 +1,30 @@
+#! /bin/bash
+
+s1="hello"
+s2="$s1 duda"
+
+
+# echo $s2
+count=$count
+b=$b
+
+echo "Wie viele?"
+read -r count
+for (( i = 0; i < $count; i++)); do
+read -r a
+b="$b $a"
+done
+
+echo $b
+
+echo "Wie viele?"
+read -r i
+for (( i = $i; i > 0; i-- )); do
+  read -r a
+  if [[ $count == 1 ]]; then
+    b="$a"
+  else
+  b="$b $a"
+fi
+done
+echo $b
