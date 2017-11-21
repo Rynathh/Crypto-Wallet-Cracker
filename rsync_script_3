@@ -87,7 +87,7 @@ done
       echo -e "GOGO GADGET"
       rsync -avzh --progress --dry-run --files-from=$source_files $cpuser@$cpserver:/ $destdir
       ;;
-    n*|N*|j*|J* )
+    n*|N* )
       echo -e "Ordentlich Tippen! Script restart"
       ./rsync_script_3
   esac
