@@ -2,14 +2,14 @@
 
 # variables
 
-  maxcount=$maxcount          # Anzahl an Ordnern, die kopiert werden sollen
-  sourcedir=$sourcedir        # Qullordner (wird in source_files geschrieben)
-  destdir=$destdir            # Zielordner
-  cpuser=$cpuser              # User auf Zeilserver
-  confirm=$confirm            # Finale Abfrage, ob der Vorgang gestartet werden soll
-  cpserver=$cpserver          # Zeilserver
-  sourcedir_tmp=$source_files  # Datei für Quellordner
-  source_files=./sourcedir_tmp
+  maxcount=$maxcount            # Anzahl an Ordnern, die kopiert werden sollen
+  sourcedir=$sourcedir          # Qullordner (wird in source_files geschrieben)
+  destdir=$destdir              # Zielordner
+  cpuser=$cpuser                # User auf Zeilserver
+  confirm=$confirm              # Finale Abfrage, ob der Vorgang gestartet werden soll
+  cpserver=$cpserver            # Zeilserver
+  sourcedir_tmp=$source_files   # Datei für Quellordner
+  source_files=./sourcedir_tmp  # Ort für Quellordner File
 
 # temp datei für Quellordner erstellen
   rm sourcedir_tmp            # sollte die Datei existiere > löschen
