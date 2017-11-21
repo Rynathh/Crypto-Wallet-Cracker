@@ -29,7 +29,7 @@
 for (( i = 0; i < $maxcount; i++)); do
 
   # Welche(r) Ordner $sourcedir
-  echo -e "Welche Ordner soll kopiert werden?(vom qnap)"
+  echo -e "Welcher Ordner soll kopiert werden?(vom qnap)"
 
   read -r sourcedir
   while [[ "$sourcedir" = "" ]]; do
@@ -92,7 +92,3 @@ done
       ./rsync_script_3
   esac
 # done #ende for $maxcount
-
-
-# rsync -avzh --dry-run --files-from=testlist.txt /home/jukas rynathh@ultron:/home/rynathh
-# filelist plaintext, one line per file/folder
