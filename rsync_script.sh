@@ -2,18 +2,20 @@
 
 # variables
 
-  maxcount=$maxcount            # Anzahl an Ordnern, die kopiert werden sollen
-  sourcedir=$sourcedir          # Qullordner (wird in source_files geschrieben)
-  destdir=$destdir              # Zielordner
-  cpuser=$cpuser                # User auf Zeilserver
-  confirm=$confirm              # Finale Abfrage, ob der Vorgang gestartet werden soll
-  cpserver=$cpserver            # Zeilserver
-  sourcedir_tmp=$source_files   # Datei für Quellordner
-  source_files=./sourcedir_tmp  # Ort für Quellordner File
+  maxcount=$maxcount              # Anzahl an Ordnern, die kopiert werden sollen
+  sourcedir=$sourcedir            # Qullordner (wird in source_files geschrieben)
+  destdir=$destdir                # Zielordner
+  cpuser=$cpuser                  # User auf Zeilserver
+  confirm=$confirm                # Finale Abfrage, ob der Vorgang gestartet werden soll
+  cpserver=$cpserver              # Zeilserver
+  sourcedir_tmp=$source_files     # Datei für Quellordner
+  source_files=./sourcedir_tmp    # Ort für Quellordner File
 
-# temp datei für Quellordner erstellen
-  rm sourcedir_tmp            # sollte die Datei existiere > löschen
-  touch sourcedir_tmp         # erstellen von temporären Quelordner-Datei
+# temp datei löschen wenn existent
+  if [[ -f sourcedir_tmp ]]; then # sollte die Datei existiere > löschen
+   rm sourcedir_tmp            
+  fi
+  touch sourcedir_tmp             # erstellen von temporären Quelordner-Datei
 
 # Wieviele Ordner insgesammt $maxcount
  echo -e "Wie viele Ordner sind zu Kopieren?"
@@ -92,5 +94,3 @@ done
       ./rsync_script_3
   esac
 # done #ende for $maxcount
-
-# some changes to test editor
