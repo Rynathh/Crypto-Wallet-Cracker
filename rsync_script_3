@@ -92,3 +92,5 @@ done
       ./rsync_script_3
   esac
 # done #ende for $maxcount
+
+# some changes to test editor

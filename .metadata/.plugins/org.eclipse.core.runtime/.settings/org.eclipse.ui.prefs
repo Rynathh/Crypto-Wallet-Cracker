@@ -1,0 +1,8 @@
+DOCK_PERSPECTIVE_BAR=left
+ENABLE_MIN_MAX=false
+SHOW_TEXT_ON_PERSPECTIVE_BAR=false
+VIEW_TAB_POSITION=1024
+eclipse.preferences.version=1
+initialFastViewBarLocation=left
+presentationFactoryId=org.eclipse.ui.internal.r21presentationFactory
+showIntro=false
