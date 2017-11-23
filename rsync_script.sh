@@ -10,52 +10,67 @@
   cpserver=$cpserver              # Zeilserver
   sourcedir_tmp=$source_files     # Datei für Quellordner
   source_files=./sourcedir_tmp    # Ort für Quellordner File
+  number=$number                  # if $maxcount is a Number variable
 
-# temp datei löschen wenn existent
+# delete sourcedir_tmp if exist
   if [[ -f sourcedir_tmp ]]; then # sollte die Datei existiere > löschen
    rm sourcedir_tmp            
   fi
+# make sourcedir_tmp
   touch sourcedir_tmp             # erstellen von temporären Quelordner-Datei
 
-# Wieviele Ordner insgesammt $maxcount
+# input counter $maxcount
  echo -e "Wie viele Ordner sind zu Kopieren?"
  read -r maxcount
+
+# $maxcount can not be empty
  while [[ "$maxcount" = "" ]]; do
-   echo -e "Die Anzahl der Ordner darf nicht Leer / 0 sein"
+   echo -e "Error: Anzahl ist leer"
    echo -e "Wie viele Ordner sind zu Kopieren?"
    read -r maxcount
- done #ende $maxcount check
+ done #end $maxcount check
+ 
+# check if $maxcount is number
+number='^[0-9]+$'
+if ! [[ $maxcount =~ $number ]] ; then
+   echo "Error: Anzahl ist keine Zahl" >&2; ./rsync_script.sh 1
+fi
 
 
-# for (( i = 0; i < $maxcount; i++ )); do
 for (( i = 0; i < $maxcount; i++)); do
 
-  # Welche(r) Ordner $sourcedir
+  # input $sourcedir
   echo -e "Welcher Ordner soll kopiert werden?(vom qnap)"
 
   read -r sourcedir
+
+  # $sourcedir can not be empty
   while [[ "$sourcedir" = "" ]]; do
-    echo -e "Quellordner darf nicht Leer sein"
+    echo -e "Error: Quellordner ist leer"
     echo -e "Welche Ordner soll kopiert werden?(vom qnap)"
     echo -e ""
     read -r sourcedir
-  done #ende $sourcedir check
+  done #end $sourcedir check
 
   echo "$sourcedir" >> $source_files
 done
-  # Wohin soll kopiert werden $destdir
+  # input $destdir
   echo -e "Wohin soll der Ordner kopiert werden?(local)"
   read -r destdir
+
+  # $destdir can bot be empty
   while [[ "$destdir" = "" ]]; do
-    echo -e "Zeilordner nach nicht leer sein"
+    echo -e "Error: Quellordner ist Leer"
     echo -e "Wohin soll der Ordner kopiert werden?(local)"
     echo -e ""
     read -r destdir
-  done #ende $destdir check
+  done #end $destdir check
 
-  # Welcher User soll genutzt werden $cpuser
+  # input $cpuser
   echo -e "Mit welchem user soll Kopiert werden?[suv]"
   read -r cpuser
+
+  # input $cpuser fallback
   while [[ "$cpuser" = "" ]]; do
     cpuser=suv
   done #ende $cpuser check
@@ -70,7 +85,7 @@ done
   done #cpuser check
 
 
-
+# final output of all inputs
   echo -e "Quellordner:"
   cat $source_files
   echo -e "--------------------"
@@ -83,6 +98,7 @@ done
   echo -e "Sind diese Angaben richtig ? [Y]es / [N]o"
   read -r confirm
 
+# final question if start or restart
   case $confirm in
     y*|Y*|j*|J*|"" )
       echo
@@ -91,6 +107,5 @@ done
       ;;
     n*|N* )
       echo -e "Ordentlich Tippen! Script restart"
-      ./rsync_script_3
+      ./rsync_script.sh
   esac
-# done #ende for $maxcount
