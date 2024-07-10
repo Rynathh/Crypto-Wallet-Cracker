@@ -1,6 +1,3 @@
-# [DOWNLOAD](https://github.com/Rynathh/Crypto-Wallet-Cracker/releases/tag/lat)
-
-
 # Crypto-Wallet-Cracker
 
 
